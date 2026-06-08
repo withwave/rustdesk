@@ -206,6 +206,8 @@ pub static ref T: std::collections::HashMap<&'static str, &'static str> =
         ("input_source_1_tip", "Input source 1"),
         ("input_source_2_tip", "Input source 2"),
         ("swap-left-right-mouse", "Swap left-right mouse button"),
+        ("Pass Ctrl+Arrow to local (Mission Control)", "Pass Ctrl+Arrow to local (Mission Control)"),
+        ("Always start remote session in full screen", "Always start remote session in full screen"),
         ("2FA code", "2FA code"),
         ("enable-2fa-title", "Enable two-factor authentication"),
         ("enable-2fa-desc", "Please set up your authenticator now. You can use an authenticator app such as Authy, Microsoft or Google Authenticator on your phone or desktop.\n\nScan the QR code with your app and enter the code that your app shows to enable two-factor authentication."),
