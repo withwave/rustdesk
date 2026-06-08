@@ -2035,6 +2035,14 @@ Future<bool> restoreWindowPosition(WindowType type,
         // No need to change the position of a sub window if no position is saved,
         // since the default position is already centered.
         // https://github.com/rustdesk/rustdesk/blob/317639169359936f7f9f85ef445ec9774218772d/flutter/lib/utils/multi_window_manager.dart#L163
+        // But still honor "start remote maximized" for new remote sessions.
+        if (type == WindowType.RemoteDesktop &&
+            windowId != null &&
+            mainGetLocalBoolOptionSync(kOptionStartRemoteMaximized)) {
+          Future.delayed(Duration(milliseconds: 300), () async {
+            await WindowController.fromWindowId(windowId).maximize();
+          });
+        }
         break;
     }
     return true;
@@ -2134,7 +2142,9 @@ Future<bool> restoreWindowPosition(WindowType type,
                 windowId, kWindowEventSetFullscreen, 'true');
           }
         });
-      } else if (lpos.isMaximized == true) {
+      } else if (lpos.isMaximized == true ||
+          (type == WindowType.RemoteDesktop &&
+              mainGetLocalBoolOptionSync(kOptionStartRemoteMaximized))) {
         await restoreFrame();
         // An duration is needed to avoid the window being restored after maximized.
         Future.delayed(Duration(milliseconds: 300), () async {
